@@ -33,4 +33,8 @@
     ansible.builtin.copy:
       src: frontend.conf
       dest: /etc/nginx/default.d/expense.conf
-      
+
+  - name: restart frontend
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
