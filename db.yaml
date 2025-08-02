@@ -2,7 +2,7 @@
   hosts: db-ansible
   become: yes
   vars:
-    login_host: db.devopswithmsvs.uno
+    login_host: db-ansible.devopswithmsvs.uno
   vars_prompt:
   - name: mysql_root_password
     prompt: please enter server password
