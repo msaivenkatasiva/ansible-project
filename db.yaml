@@ -1,5 +1,5 @@
 - name: configure db server
-  hosts: db
+  hosts: db-ansible
   become: yes
   vars:
     login_host: db.devopswithmsvs.uno
@@ -22,7 +22,7 @@
   - name: installpython mysql dependencies
     ansible.builtin.pip:
       name:
-      - pymysql
+      - PYMYSQL
       - cryptography
       executable: pip3.9 #if python version is 3.11 then go for pip3.11
 
@@ -32,14 +32,14 @@
       login_password: "{{ mysql_root_password }}"
       login_host: "{{ login_host }}"
       filter: version
-      ignore_errors: yes
-      register: mysql_connection_output
+    ignore_errors: yes
+    register: mysql_connection_output
 
   - name: print output
     ansible.builtin.debug:
       msg: "output: {{mysql_connection_output}}"
 
   - name: setup root password
-    ansible.builtin.debug:
+    ansible.builtin.command:
       msg: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
 
