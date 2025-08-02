@@ -52,3 +52,22 @@
       - PyMySQL
       - cryptography
       executable: pip3.9
+
+  - name: import data into mysql
+    community.mysql.mysql:
+      login_user: root
+      login_password: "{{ login_password }}"
+      login_host: "{{ login_host }}"
+      target: /app/schema/backend.sql
+      state: import
+      name: all
+
+  - name: daemon reload
+    ansible.builtin.systemd_service:
+      deamon_reload: true
+
+  - name: start and enable backend
+    ansible.builtin.service:
+      name: backend
+      state: started
+      enabled: true
