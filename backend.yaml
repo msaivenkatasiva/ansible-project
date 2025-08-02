@@ -44,4 +44,4 @@
   - name: copying backend file
     ansible.builtin.copy:
       src: backend.service
-      dest: etc/systemd/system/backend.service
+      dest: /etc/systemd/system/backend.service
